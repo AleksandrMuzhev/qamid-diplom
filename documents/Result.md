@@ -8,11 +8,11 @@
 В ходе автоматического тестирования приложения на эмуляторе Medium Phone API 29
 успешно пройдено Unknown тестов (Unknown % - успешных тестов)
 
-![]()
+![](https://github.com/AleksandrMuzhev/qamid-diplom/blob/main/documents/allure-result.jpg)
 
-![]()
+![](https://github.com/AleksandrMuzhev/qamid-diplom/blob/main/documents/allure-result-diagrams.jpg)
 
-[Allure Report]()
+[Allure Report](https://github.com/AleksandrMuzhev/qamid-diplom/blob/main/documents/allure-results.zip)
 
 ## Результаты сравнения времени проверки приложения:
 
