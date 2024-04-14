@@ -1,8 +1,7 @@
 reserve.md
 HELP.md
 .gradle
-google-services.json
-fmh-android/build/
+build/
 app/release/
 
 ### STS ###

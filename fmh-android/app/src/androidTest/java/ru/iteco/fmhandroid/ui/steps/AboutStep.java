@@ -1,0 +1,53 @@
+package ru.iteco.fmhandroid.ui.steps;
+
+import static androidx.test.espresso.action.ViewActions.click;
+import static androidx.test.espresso.assertion.ViewAssertions.matches;
+import static androidx.test.espresso.matcher.ViewMatchers.isClickable;
+import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
+import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import static ru.iteco.fmhandroid.ui.data.Helper.elementWaiting;
+import static ru.iteco.fmhandroid.ui.screenElement.AboutElement.companyInfoLabel;
+import static ru.iteco.fmhandroid.ui.screenElement.AboutElement.privacyPolicyLabel;
+import static ru.iteco.fmhandroid.ui.screenElement.AboutElement.privacyPolicyValue;
+import static ru.iteco.fmhandroid.ui.screenElement.AboutElement.returnButton;
+import static ru.iteco.fmhandroid.ui.screenElement.AboutElement.termsOfUseLabel;
+import static ru.iteco.fmhandroid.ui.screenElement.AboutElement.termsOfUseValue;
+import static ru.iteco.fmhandroid.ui.screenElement.AboutElement.trademark;
+import static ru.iteco.fmhandroid.ui.screenElement.AboutElement.versionTitle;
+import static ru.iteco.fmhandroid.ui.screenElement.AboutElement.versionValue;
+
+import io.qameta.allure.kotlin.Allure;
+import ru.iteco.fmhandroid.R;
+
+public class AboutStep {
+
+    public void checkScreenElementsAbout() {
+        Allure.step("Проверка элементов экрана About us");
+        elementWaiting(withId(R.id.about_company_info_label_text_view), 5000);
+        trademark.check(matches(isDisplayed()));
+        versionTitle.check(matches(isDisplayed()));
+        versionValue.check(matches(isDisplayed()));
+        privacyPolicyLabel.check(matches(isDisplayed()));
+        privacyPolicyValue.check(matches(isDisplayed()));
+        termsOfUseLabel.check(matches(isDisplayed()));
+        termsOfUseValue.check(matches(isDisplayed()));
+        companyInfoLabel.check(matches(isDisplayed()));
+        returnButton.check(matches(isDisplayed()));
+    }
+
+    public void clickLinkPrivacyPolicy() {
+        Allure.step("Кликабельность ссылки - Политика конфиденциальности");
+        elementWaiting(withId(R.id.about_company_info_label_text_view), 5000);
+        privacyPolicyValue.check(matches(isClickable()));
+    }
+
+    public void clickLinkTermsofUse() {
+        Allure.step("Кликабельность ссылки - Условия использования");
+        termsOfUseValue.check(matches(isClickable()));
+    }
+
+    public void checkReturnButton() {
+        Allure.step("Работа кнопки возврат");
+        returnButton.perform(click());
+    }
+}
