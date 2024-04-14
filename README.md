@@ -20,10 +20,10 @@
 
 ## Документация
 
-- [План тестирования]()
-- [Чек-лист]()
-- [Тест-кейсы]()
-- [Отчет о тестировании]()
+- [План тестирования](https://github.com/AleksandrMuzhev/qamid-diplom/blob/main/documents/Plan.md)
+- [Чек-лист](https://github.com/AleksandrMuzhev/qamid-diplom/blob/main/documents/Check.xlsx)
+- [Тест-кейсы](https://github.com/AleksandrMuzhev/qamid-diplom/blob/main/documents/Cases.xlsx)
+- [Отчет о тестировании](https://github.com/AleksandrMuzhev/qamid-diplom/blob/main/documents/Result.md)
 
 ---
 
