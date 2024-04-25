@@ -7,13 +7,16 @@ import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.junit.Assert.assertEquals;
 import static ru.iteco.fmhandroid.ui.data.Helper.waitForElement;
 import static ru.iteco.fmhandroid.ui.data.Helper.withIndex;
+import static ru.iteco.fmhandroid.ui.screenElement.MainElement.getNewsDescriptionText;
+import static ru.iteco.fmhandroid.ui.screenElement.NewsElement.getNewsTitleText;
 import static ru.iteco.fmhandroid.ui.screenElement.PanelElement.addNewsButton;
 import static ru.iteco.fmhandroid.ui.screenElement.PanelElement.filterNewsButton;
+import static ru.iteco.fmhandroid.ui.screenElement.PanelElement.getButtonEditNews;
+import static ru.iteco.fmhandroid.ui.screenElement.PanelElement.getNewsPublicationDate;
 import static ru.iteco.fmhandroid.ui.screenElement.PanelElement.newsDescriptionText;
 import static ru.iteco.fmhandroid.ui.screenElement.PanelElement.newsList;
 import static ru.iteco.fmhandroid.ui.screenElement.PanelElement.newsTitleText;
@@ -23,7 +26,6 @@ import static ru.iteco.fmhandroid.ui.screenElement.PanelElement.statusActive;
 import static ru.iteco.fmhandroid.ui.screenElement.PanelElement.statusNotActive;
 
 import io.qameta.allure.kotlin.Allure;
-import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.data.Helper;
 
 public class PanelSteps {
@@ -38,12 +40,12 @@ public class PanelSteps {
 
     public String getFirstNewsDate(int index) {
         Allure.step("Дата публикации первой новости");
-        return Helper.Text.getText(onView(withIndex(withId(R.id.news_item_publication_date_text_view), index)));
+        return Helper.Text.getText(onView(withIndex(getNewsPublicationDate(), index)));
     }
 
     public String getFirstNewsDateAfterSecondSort(int index) {
         Allure.step("Получить дату публикации первой новости после двух сортировок");
-        return Helper.Text.getText(onView(withIndex(withId(R.id.news_item_publication_date_text_view), index)));
+        return Helper.Text.getText(onView(withIndex(getNewsPublicationDate(), index)));
     }
 
     public void checkPanelSort() {
@@ -74,7 +76,7 @@ public class PanelSteps {
 
     public void clickEditNews(int index) {
         Allure.step("Нажать редактирование новости");
-        onView(withIndex(withId(R.id.edit_news_item_image_view), index)).perform(click());
+        onView(withIndex(getButtonEditNews(), index)).perform(click());
         onView(isRoot()).perform(waitForElement(withText("Editing"), 5000));
     }
 
@@ -85,12 +87,12 @@ public class PanelSteps {
 
     public String getEditNewsTitle(int index) {
         Allure.step("Редактированный заголовок новости");
-        return Helper.Text.getText(onView(withIndex(withId(R.id.news_item_title_text_view), index)));
+        return Helper.Text.getText(onView(withIndex(getNewsTitleText(), index)));
     }
 
     public String getEditNewsDescription(int index) {
         Allure.step("Редактированное содержание новости");
-        return Helper.Text.getText(onView(withIndex(withId(R.id.news_item_description_text_view), index)));
+        return Helper.Text.getText(onView(withIndex(getNewsDescriptionText(), index)));
     }
 
     public void checkStatusNotActive() {
@@ -106,7 +108,7 @@ public class PanelSteps {
     public void checkCreateNews(int position, String titleText, String descriptionText) {
         Allure.step("Заголовок и содержание новости");
         newsList.perform(actionOnItemAtPosition(position, click()));
-        onView(isRoot()).perform(waitForElement(withId(R.id.news_item_description_text_view), 5000));
+        onView(isRoot()).perform(waitForElement(getNewsDescriptionText(), 5000));
         newsTitleText.check(matches(withText(titleText)));
         newsDescriptionText.check(matches(withText(descriptionText)));
     }

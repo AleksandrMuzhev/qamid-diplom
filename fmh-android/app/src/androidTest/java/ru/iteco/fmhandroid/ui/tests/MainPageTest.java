@@ -45,6 +45,15 @@ public class MainPageTest {
     }
 
     @Test
+    @DisplayName("Развернуть отдельную новость")
+    @Description("При нажатии на отдельную новость отображается ее описание")
+    public void testExpandSeparateNewsItem() {
+        mainStep.checkOneNews(0);
+        mainStep.descriptionIsDisplay(0);
+    }
+
+
+    @Test
     @DisplayName("Отображение разделов меню")
     @Description("В списке есть разделы Main, News, About")
     public void testCheckMenuScreenList() {
@@ -80,11 +89,5 @@ public class MainPageTest {
         mainStep.allNewsDisplay();
     }
 
-    @Test
-    @DisplayName("Развернуть отдельную новость")
-    @Description("При нажатии на отдельную новость отображается ее описание")
-    public void testExpandSeparateNewsItem() {
-        mainStep.checkOneNews(0);
-        mainStep.descriptionIsDisplay(0);
-    }
+
 }

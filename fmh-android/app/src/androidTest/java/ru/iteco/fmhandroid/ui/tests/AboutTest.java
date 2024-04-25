@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import io.qameta.allure.android.runners.AllureAndroidJUnit4;
-import io.qameta.allure.kotlin.Description;
 import io.qameta.allure.kotlin.junit4.DisplayName;
 import ru.iteco.fmhandroid.ui.AppActivity;
 import ru.iteco.fmhandroid.ui.data.Helper;
@@ -46,7 +45,6 @@ public class AboutTest {
 
     @Test
     @DisplayName("Проверка элементов экрана About")
-    @Description("Корректность отображения всех элементов экрана About")
     public void testCheckScreenElementsAbout() {
         aboutStep.checkScreenElementsAbout();
     }

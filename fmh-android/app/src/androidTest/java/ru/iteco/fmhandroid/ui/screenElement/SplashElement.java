@@ -1,17 +1,16 @@
 
 package ru.iteco.fmhandroid.ui.screenElement;
 
-import static androidx.test.espresso.Espresso.onView;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
+import android.view.View;
 
-import androidx.test.espresso.ViewInteraction;
+import androidx.test.espresso.matcher.ViewMatchers;
+
+import org.hamcrest.Matcher;
 
 import ru.iteco.fmhandroid.R;
 
 public class SplashElement {
-    public static ViewInteraction splashImage = onView(withId(R.id.splashscreen_image_view));
-    public static ViewInteraction splashText = onView(withId(R.id.splashscreen_text_view));
-    public static ViewInteraction splashProgressIndicator =
-            onView(withId(R.id.splash_screen_circular_progress_indicator));
-
+    public static Matcher<View> getSplashscreenImage() {
+        return ViewMatchers.withId(R.id.splashscreen_image_view);
+    }
 }

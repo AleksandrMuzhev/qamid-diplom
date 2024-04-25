@@ -4,7 +4,6 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.matcher.ViewMatchers.isClickable;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static ru.iteco.fmhandroid.ui.data.Helper.elementWaiting;
 import static ru.iteco.fmhandroid.ui.screenElement.AboutElement.companyInfoLabel;
 import static ru.iteco.fmhandroid.ui.screenElement.AboutElement.privacyPolicyLabel;
@@ -16,14 +15,19 @@ import static ru.iteco.fmhandroid.ui.screenElement.AboutElement.trademark;
 import static ru.iteco.fmhandroid.ui.screenElement.AboutElement.versionTitle;
 import static ru.iteco.fmhandroid.ui.screenElement.AboutElement.versionValue;
 
+import android.view.View;
+
+import org.hamcrest.Matcher;
+
 import io.qameta.allure.kotlin.Allure;
-import ru.iteco.fmhandroid.R;
+import ru.iteco.fmhandroid.ui.screenElement.AboutElement;
 
 public class AboutStep {
+    Matcher<View> companyInfoMatcher = AboutElement.getCompanyInfoMatcher();
 
     public void checkScreenElementsAbout() {
         Allure.step("Проверка элементов экрана About us");
-        elementWaiting(withId(R.id.about_company_info_label_text_view), 5000);
+        elementWaiting(companyInfoMatcher, 5000);
         trademark.check(matches(isDisplayed()));
         versionTitle.check(matches(isDisplayed()));
         versionValue.check(matches(isDisplayed()));
@@ -37,7 +41,7 @@ public class AboutStep {
 
     public void clickLinkPrivacyPolicy() {
         Allure.step("Кликабельность ссылки - Политика конфиденциальности");
-        elementWaiting(withId(R.id.about_company_info_label_text_view), 5000);
+        elementWaiting(companyInfoMatcher, 5000);
         privacyPolicyValue.check(matches(isClickable()));
     }
 

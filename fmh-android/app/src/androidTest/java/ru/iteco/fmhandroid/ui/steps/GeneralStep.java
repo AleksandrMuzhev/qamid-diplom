@@ -15,7 +15,7 @@ import static ru.iteco.fmhandroid.ui.screenElement.GeneralElements.oKButton;
 import static ru.iteco.fmhandroid.ui.screenElement.GeneralElements.refreshText;
 
 import io.qameta.allure.kotlin.Allure;
-import ru.iteco.fmhandroid.R;
+import ru.iteco.fmhandroid.ui.screenElement.GeneralElements;
 
 public class GeneralStep {
 
@@ -44,12 +44,12 @@ public class GeneralStep {
 
     public void checkInvalidAuthDataToast() {
         Allure.step("Проверка предупреджения");
-        checkEmptyToast(R.string.wrong_login_or_password, true);
+        checkEmptyToast(GeneralElements.getSomethingError(), true);
     }
 
     public void checkEmptyAuthDataToast() {
         Allure.step("Проверка предупреджения");
-        checkEmptyToast(R.string.empty_login_or_password, true);
+        checkEmptyToast(GeneralElements.getEmptyInfoMatcher(), true);
     }
 
     public void checkErrorToast(int id, boolean visible) {
@@ -62,7 +62,7 @@ public class GeneralStep {
 
     public void checkEmptyFieldError() {
         Allure.step("Текст ошибки - empty fields");
-        checkErrorToast(R.string.empty_fields, true);
+        checkErrorToast(GeneralElements.getEmptyFields(), true);
     }
 
     public void checkInvalidData(String text, boolean visible) {

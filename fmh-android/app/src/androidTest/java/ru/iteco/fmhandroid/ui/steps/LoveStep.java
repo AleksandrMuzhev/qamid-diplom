@@ -6,16 +6,15 @@ import static androidx.test.espresso.action.ViewActions.click;
 import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.not;
+import static ru.iteco.fmhandroid.ui.screenElement.LoveElement.getDescriptionText;
 import static ru.iteco.fmhandroid.ui.screenElement.LoveElement.missionConstraintLayout;
 import static ru.iteco.fmhandroid.ui.screenElement.LoveElement.missionList;
 import static ru.iteco.fmhandroid.ui.screenElement.LoveElement.missionName;
 
 import io.qameta.allure.kotlin.Allure;
-import ru.iteco.fmhandroid.R;
 
 public class LoveStep {
     public void checkMissionElements() {
@@ -32,13 +31,13 @@ public class LoveStep {
 
     public void descriptionNotDisplay(String text) {
         Allure.step("Отображение цитаты");
-        onView(allOf(withId(R.id.our_mission_item_description_text_view),
+        onView(allOf(getDescriptionText(),
                 withText(text))).check(matches(not(isDisplayed())));
     }
 
     public void descriptionIsDisplay(String text) {
         Allure.step("Cкрытие цитаты");
-        onView(allOf(withId(R.id.our_mission_item_description_text_view),
+        onView(allOf(getDescriptionText(),
                 withText(text))).check(matches(isDisplayed()));
     }
 }

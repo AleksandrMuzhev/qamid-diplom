@@ -7,7 +7,6 @@ import static androidx.test.espresso.assertion.ViewAssertions.matches;
 import static androidx.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
 import static androidx.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static androidx.test.espresso.matcher.ViewMatchers.isRoot;
-import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.not;
@@ -18,6 +17,7 @@ import static ru.iteco.fmhandroid.ui.screenElement.MainElement.aboutText;
 import static ru.iteco.fmhandroid.ui.screenElement.MainElement.allNews;
 import static ru.iteco.fmhandroid.ui.screenElement.MainElement.allNewsButton;
 import static ru.iteco.fmhandroid.ui.screenElement.MainElement.childNews;
+import static ru.iteco.fmhandroid.ui.screenElement.MainElement.getNewsDescriptionText;
 import static ru.iteco.fmhandroid.ui.screenElement.MainElement.logoutButton;
 import static ru.iteco.fmhandroid.ui.screenElement.MainElement.logoutText;
 import static ru.iteco.fmhandroid.ui.screenElement.MainElement.mainText;
@@ -27,10 +27,7 @@ import static ru.iteco.fmhandroid.ui.screenElement.MainElement.newsBlockButton;
 import static ru.iteco.fmhandroid.ui.screenElement.MainElement.newsList;
 import static ru.iteco.fmhandroid.ui.screenElement.MainElement.newsText;
 
-import androidx.test.espresso.ViewInteraction;
-
 import io.qameta.allure.kotlin.Allure;
-import ru.iteco.fmhandroid.R;
 import ru.iteco.fmhandroid.ui.data.Helper;
 
 public class MainStep {
@@ -70,11 +67,8 @@ public class MainStep {
 
     public void descriptionIsDisplay(int position) {
         Allure.step("Отображение описания новостей");
-        String descriptionText = Helper.Text.getText(onView(withIndex(withId
-                (R.id.news_item_description_text_view), position)));
-        ViewInteraction newsDescription = onView(allOf(withId(R.id.news_item_description_text_view),
-                withText(descriptionText)));
-        newsDescription.check(matches(isDisplayed()));
+        String descriptionText = Helper.Text.getText(onView(withIndex(getNewsDescriptionText(), position)));
+        onView(allOf(withText(descriptionText), isDisplayed())).check(matches(isDisplayed()));
     }
 
     public void clickAllNews() {

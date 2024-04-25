@@ -13,6 +13,7 @@ import io.qameta.allure.android.runners.AllureAndroidJUnit4;
 import io.qameta.allure.kotlin.Description;
 import io.qameta.allure.kotlin.junit4.DisplayName;
 import ru.iteco.fmhandroid.ui.AppActivity;
+import ru.iteco.fmhandroid.ui.screenElement.AuthElement;
 import ru.iteco.fmhandroid.ui.steps.AuthStep;
 import ru.iteco.fmhandroid.ui.steps.GeneralStep;
 import ru.iteco.fmhandroid.ui.steps.MainStep;
@@ -22,6 +23,7 @@ import ru.iteco.fmhandroid.ui.steps.SplashStep;
 public class AuthTest {
 
     AuthStep authStep = new AuthStep();
+    AuthElement authElement = new AuthElement();
     MainStep mainStep = new MainStep();
     GeneralStep generalStep = new GeneralStep();
     SplashStep splashStep = new SplashStep();
@@ -34,12 +36,12 @@ public class AuthTest {
     public void logoutCheck() {
         splashStep.appDownload();
         try {
-            authStep.loadAuthPage();
+            authElement.loadAuthPage();
             authStep.checkAuthScreenElements();
 
         } catch (Exception e) {
             mainStep.clickLogOutButton();
-            authStep.loadAuthPage();
+            authElement.loadAuthPage();
         }
     }
 
@@ -71,6 +73,7 @@ public class AuthTest {
         mainStep.clickLogOutButton();
         authStep.checkAuthScreenElements();
     }
+
     @Test
     @DisplayName("Авторизация в приложении, когда поле \"Логин\" и \"Пароль\" заполнено " +
             "данными незарегистрированного пользователя")
@@ -92,6 +95,7 @@ public class AuthTest {
         authStep.clickSignInButton();
         generalStep.checkInvalidAuthDataToast();
     }
+
     @Test
     @DisplayName("Авторизация, когда поле \"Пароль\" заполнено данными " +
             "незарегистрированного пользователя")

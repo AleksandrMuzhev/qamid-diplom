@@ -405,7 +405,6 @@ public class Helper {
                         .build();
             }
         };
-
     }
 
     public static void elementWaiting(Matcher matcher, int millis) {

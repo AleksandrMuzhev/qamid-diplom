@@ -8,7 +8,12 @@ import static org.hamcrest.Matchers.allOf;
 import static org.hamcrest.Matchers.is;
 import static ru.iteco.fmhandroid.ui.data.Helper.childAtPosition;
 
+import android.view.View;
+
 import androidx.test.espresso.ViewInteraction;
+import androidx.test.espresso.matcher.ViewMatchers;
+
+import org.hamcrest.Matcher;
 
 import ru.iteco.fmhandroid.R;
 
@@ -31,4 +36,8 @@ public class MainElement {
                             childAtPosition(withClassName(is("android.widget.LinearLayout")),
                                     withId(R.id.container_list_news_include_on_fragment_main),
                                     0), 4)));
+
+    public static Matcher<View> getNewsDescriptionText() {
+        return ViewMatchers.withId(R.id.news_item_description_text_view);
+    }
 }

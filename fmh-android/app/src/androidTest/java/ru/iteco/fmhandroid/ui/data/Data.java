@@ -14,7 +14,6 @@ public class Data {
     public static final String invalidPass = faker.internet.password();
     public static final String emptyLogin = "";
     public static final String emptyPass = "";
-    public static final String executor = "Алексеев Алексей Алексеевич";
 
     public String quoteText = "Все сотрудники хосписа - это адвокаты пациента, его прав и потребностей. " +
             "Поиск путей решения различных задач - это и есть хосписный индивидуальный подход к паллиативной помощи.";
@@ -22,7 +21,6 @@ public class Data {
     public String dateOfPublic = getCurrentDate();
     public String timeOfPublic = getCurrentTime();
     public String dateNonNews = "09.09.1999";
-
     public String descriptOnCyr = "Другое описание новости";
     public String descriptSymb = "='+*&^%$#@~";
     public String titleCyr = "Заголовок новости";

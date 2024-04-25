@@ -38,7 +38,6 @@ public class NewsTest {
     NewsStep newsStep = new NewsStep();
     MainStep mainStep = new MainStep();
     PanelSteps panelSteps = new PanelSteps();
-    PanelElement panelElement = new PanelElement();
     FilterNewsStep filterScreen = new FilterNewsStep();
     Data data = new Data();
     CreateNewsStep createNewsStep = new CreateNewsStep();
@@ -67,14 +66,33 @@ public class NewsTest {
     }
 
     @Test
+    @DisplayName("Создать новость на кирилице")
+    @Description("Заполнение полей данным на кириллице")
+    public void testCreateNewsCyrillic() {
+        newsStep.clickEditButton();
+        panelSteps.clickCreateNewsButton();
+        createNewsStep.checkNewsScreenElements();
+        createNewsStep.createNews(randomCategory(), data.titleCyr, data.dateOfPublic,
+                data.timeOfPublic, data.descriptOnCyr);
+        generalStep.clickSaveButton();
+        mainStep.goToNews();
+        newsStep.newsListLoad();
+        panelSteps.checkCreateNews(0, data.titleCyr, data.descriptOnCyr);
+        NewsElement.allNewsBlock.perform(swipeDown());
+        newsStep.checkOpenNews(0);
+        String createdDescription = newsStep.getCreateNewsDescription(0);
+        assertEquals(data.descriptOnCyr, createdDescription);
+    }
+
+    @Test
     @DisplayName("Сортировка новостей во вкладке \"Новости\" ")
     @Description("Меняется порядок отображения новостей по дате")
     public void testSortNews() {
         String firstNewsTitle = newsStep.getFirstNewsTitle(0);
         newsStep.clickSortButton();
-        newsElement.allNewsBlock.perform(swipeDown());
+        NewsElement.allNewsBlock.perform(swipeDown());
         newsStep.clickSortButton();
-        newsElement.allNewsBlock.perform(swipeDown());
+        NewsElement.allNewsBlock.perform(swipeDown());
         newsStep.newsListLoad();
         String firstNewsTitleAfterSecondSorting = newsStep.getFirstNewsAfterSecondSort(0);
         assertEquals(firstNewsTitle, firstNewsTitleAfterSecondSorting);
@@ -135,6 +153,11 @@ public class NewsTest {
         filterScreen.clickFilter();
         newsStep.newsListLoad();
         panelSteps.checkStatusActive();
+        panelSteps.clickEditNews(0);
+        editNewsStep.checkEditNewsElements();
+        editNewsStep.changeStatus();
+        generalStep.clickSaveButton();
+        panelSteps.clickOneNewsItem(0);
         panelSteps.openNewsFilter();
         filterScreen.clickActiveCheckBox();
         filterScreen.clickFilter();
@@ -150,25 +173,6 @@ public class NewsTest {
         panelSteps.openNewsFilter();
         generalStep.clickCancelButton();
         panelSteps.checkPanelElements();
-    }
-
-    @Test
-    @DisplayName("Создать новость на кирилице")
-    @Description("Заполнение полей данным на кириллице")
-    public void testCreateNewsCyrillic() {
-        newsStep.clickEditButton();
-        panelSteps.clickCreateNewsButton();
-        createNewsStep.checkNewsScreenElements();
-        createNewsStep.createNews(randomCategory(), data.titleCyr, data.dateOfPublic,
-                data.timeOfPublic, data.descriptOnCyr);
-        generalStep.clickSaveButton();
-        newsStep.newsListLoad();
-        panelSteps.checkCreateNews(0, data.titleCyr, data.descriptOnCyr);
-        mainStep.goToNews();
-        newsElement.allNewsBlock.perform(swipeDown());
-        newsStep.checkOpenNews(0);
-        String createdDescription = newsStep.getCreateNewsDescription(0);
-        assertEquals(data.descriptOnCyr, createdDescription);
     }
 
     @Test
@@ -223,6 +227,28 @@ public class NewsTest {
     }
 
     @Test
+    @DisplayName("Отмена редактирование новости")
+    @Description("Нажать кнопку отмены и подтвердить, тогда новость не изменятеся")
+    public void testCancelEditNews() {
+        newsStep.clickEditButton();
+        panelSteps.clickCreateNewsButton();
+        createNewsStep.createNews(randomCategory(), data.titleCyr,
+                data.dateOfPublic, data.timeOfPublic, data.descriptOnCyr);
+        generalStep.clickSaveButton();
+        newsStep.newsListLoad();
+        panelSteps.clickEditNews(0);
+        editNewsStep.checkEditNewsElements();
+        editNewsStep.changeTitle(data.newTitle);
+        editNewsStep.changeDescription(data.newDescription);
+        generalStep.clickCancelButton();
+        generalStep.clickOkButton();
+        panelSteps.checkPanelElements();
+        PanelElement.newsList.perform(swipeDown());
+        panelSteps.clickOneNewsItem(0);
+        assertEquals(data.titleCyr, panelSteps.getEditNewsTitle(0));
+    }
+
+    @Test
     @DisplayName("Редактирование новости")
     @Description("Новость с новыми данными")
     public void testEditNews() {
@@ -240,27 +266,5 @@ public class NewsTest {
         panelSteps.clickOneNewsItem(0);
         assertEquals(data.newTitleEdit, panelSteps.getEditNewsTitle(0));
         assertEquals(data.newDescriptionEdit, panelSteps.getEditNewsDescription(0));
-    }
-
-    @Test
-    @DisplayName("Отмена редактирование новости")
-    @Description("Нажать кнопку отмены и подтвердить, тогда новость не изменятеся")
-    public void testCancelEditNews() {
-        newsStep.clickEditButton();
-        panelSteps.clickCreateNewsButton();
-        createNewsStep.createNews(randomCategory(), data.titleCyr,
-                data.dateOfPublic, data.timeOfPublic, data.descriptOnCyr);
-        generalStep.clickSaveButton();
-        newsStep.newsListLoad();
-        panelSteps.clickEditNews(0);
-        editNewsStep.checkEditNewsElements();
-        editNewsStep.changeTitle(data.newTitle);
-        editNewsStep.changeDescription(data.newDescription);
-        generalStep.clickCancelButton();
-        generalStep.clickOkButton();
-        panelSteps.checkPanelElements();
-        panelElement.newsList.perform(swipeDown());
-        panelSteps.clickOneNewsItem(0);
-        assertEquals(data.titleCyr, panelSteps.getEditNewsTitle(0));
     }
 }

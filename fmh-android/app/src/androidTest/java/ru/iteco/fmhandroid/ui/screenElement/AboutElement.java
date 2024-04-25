@@ -3,7 +3,12 @@ package ru.iteco.fmhandroid.ui.screenElement;
 import static androidx.test.espresso.Espresso.onView;
 import static androidx.test.espresso.matcher.ViewMatchers.withId;
 
+import android.view.View;
+
 import androidx.test.espresso.ViewInteraction;
+import androidx.test.espresso.matcher.ViewMatchers;
+
+import org.hamcrest.Matcher;
 
 import ru.iteco.fmhandroid.R;
 
@@ -21,5 +26,9 @@ public class AboutElement {
             onView(withId(R.id.about_privacy_policy_value_text_view));
     public static ViewInteraction companyInfoLabel =
             onView(withId(R.id.about_company_info_label_text_view));
+
+    public static Matcher<View> getCompanyInfoMatcher() {
+        return ViewMatchers.withId(R.id.about_company_info_label_text_view);
+    }
     public static ViewInteraction returnButton = onView(withId(R.id.about_back_image_button));
 }

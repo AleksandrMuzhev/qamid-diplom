@@ -7,6 +7,7 @@ import static androidx.test.espresso.matcher.ViewMatchers.withId;
 import static androidx.test.espresso.matcher.ViewMatchers.withParent;
 import static androidx.test.espresso.matcher.ViewMatchers.withText;
 import static org.hamcrest.Matchers.allOf;
+import static ru.iteco.fmhandroid.ui.data.Helper.elementWaiting;
 
 import android.view.View;
 
@@ -14,6 +15,7 @@ import androidx.test.espresso.ViewInteraction;
 
 import org.hamcrest.core.IsInstanceOf;
 
+import io.qameta.allure.kotlin.Allure;
 import ru.iteco.fmhandroid.R;
 
 public class AuthElement {
@@ -30,4 +32,9 @@ public class AuthElement {
             onView(allOf(withId(R.id.enter_button),
                     withText("SIGN IN"), withContentDescription("Save"),
                     withParent(withParent(IsInstanceOf.<View>instanceOf(android.widget.RelativeLayout.class)))));
+
+    public void loadAuthPage() {
+        Allure.step("Загрузка страницы авторизации");
+        elementWaiting(withId(R.id.enter_button), 5000);
+    }
 }

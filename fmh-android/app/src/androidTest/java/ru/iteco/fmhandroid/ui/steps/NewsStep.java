@@ -12,6 +12,9 @@ import static ru.iteco.fmhandroid.ui.screenElement.NewsElement.allNewsBlock;
 import static ru.iteco.fmhandroid.ui.screenElement.NewsElement.childNewsButton;
 import static ru.iteco.fmhandroid.ui.screenElement.NewsElement.editNewsButton;
 import static ru.iteco.fmhandroid.ui.screenElement.NewsElement.filterNewsButton;
+import static ru.iteco.fmhandroid.ui.screenElement.NewsElement.getDescriptionTextNewsView;
+import static ru.iteco.fmhandroid.ui.screenElement.NewsElement.getNewsMainList;
+import static ru.iteco.fmhandroid.ui.screenElement.NewsElement.getNewsTitleText;
 import static ru.iteco.fmhandroid.ui.screenElement.NewsElement.newsName;
 import static ru.iteco.fmhandroid.ui.screenElement.NewsElement.sortNewsButton;
 
@@ -25,7 +28,7 @@ public class NewsStep {
 
     public void newsListLoad() {
         Allure.step("Загрузка списка новостей");
-        elementWaiting(withId(R.id.news_list_recycler_view), 5000);
+        elementWaiting(getNewsMainList(), 5000);
     }
 
     public void checkNewsElements() {
@@ -59,16 +62,16 @@ public class NewsStep {
 
     public String getFirstNewsTitle(int index) {
         Allure.step("Заголовок первой новости");
-        return Helper.Text.getText(onView(withIndex(withId(R.id.news_item_title_text_view), index)));
+        return Helper.Text.getText(onView(withIndex(getNewsTitleText(), index)));
     }
 
     public String getFirstNewsAfterSecondSort(int index) {
         Allure.step("Заголовок первой новости после второй сортировки");
-        return Helper.Text.getText(onView(withIndex(withId(R.id.news_item_title_text_view), index)));
+        return Helper.Text.getText(onView(withIndex(getNewsTitleText(), index)));
     }
 
     public String getCreateNewsDescription(int index) {
         Allure.step("Описание созданной новости");
-        return Helper.Text.getText(onView(withIndex(withId(R.id.news_item_description_text_view), index)));
+        return Helper.Text.getText(onView(withIndex(getDescriptionTextNewsView(), index)));
     }
 }
